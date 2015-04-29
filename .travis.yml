@@ -2,5 +2,5 @@ language: java
 jdk:
   - oraclejdk8
 script:
-  - mvn spring-nio-rest clean install      
+  - mvn clean install      
 # - mvn mylab-core cobertura:cobertura coveralls:report -DrepoToken=LK5cUszS1GJtt9v0eqKXUY90ORmeNtSsa
