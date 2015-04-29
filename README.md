@@ -1,4 +1,7 @@
 # spring-nio-rest
+
+[![Build Status](https://travis-ci.org/codependent/spring-nio-rest.svg?branch=master)](https://travis-ci.org/codependent/spring-nio-rest)
+
 Spring Boot Project showing how efficient nio REST services can be, instead of blocking REST services.
 
 ## Considerations
