@@ -1,4 +1,4 @@
-package com.josesa.niorest.controller;
+package com.codependent.niorest.controller;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.josesa.niorest.dto.Data;
-import com.josesa.niorest.service.DataService;
+import com.codependent.niorest.dto.Data;
+import com.codependent.niorest.service.DataService;
 
 @RestController
 public class AsyncRestController {

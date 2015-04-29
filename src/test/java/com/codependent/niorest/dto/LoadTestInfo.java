@@ -1,4 +1,4 @@
-package com.josesa.niorest.dto;
+package com.codependent.niorest.dto;
 
 import java.util.ArrayList;
 import java.util.List;

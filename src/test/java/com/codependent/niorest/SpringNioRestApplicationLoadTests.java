@@ -1,4 +1,4 @@
-package com.josesa.niorest;
+package com.codependent.niorest;
 
 import java.util.List;
 
@@ -12,7 +12,8 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import com.josesa.niorest.dto.LoadTestInfo;
+import com.codependent.niorest.SpringNioRestApplication;
+import com.codependent.niorest.dto.LoadTestInfo;
 
 
 @SpringApplicationConfiguration(classes = SpringNioRestApplication.class)

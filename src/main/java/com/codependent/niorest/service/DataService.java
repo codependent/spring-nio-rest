@@ -1,8 +1,8 @@
-package com.josesa.niorest.service;
+package com.codependent.niorest.service;
 
 import java.util.List;
 
-import com.josesa.niorest.dto.Data;
+import com.codependent.niorest.dto.Data;
 
 public interface DataService {
 

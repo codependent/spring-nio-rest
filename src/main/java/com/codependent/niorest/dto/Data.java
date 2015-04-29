@@ -1,4 +1,4 @@
-package com.josesa.niorest.dto;
+package com.codependent.niorest.dto;
 
 import java.io.Serializable;
 

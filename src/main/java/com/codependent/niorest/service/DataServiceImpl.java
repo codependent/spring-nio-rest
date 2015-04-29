@@ -1,11 +1,11 @@
-package com.josesa.niorest.service;
+package com.codependent.niorest.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.josesa.niorest.dto.Data;
+import com.codependent.niorest.dto.Data;
 
 @Service
 public class DataServiceImpl implements DataService{

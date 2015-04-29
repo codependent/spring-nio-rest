@@ -1,4 +1,4 @@
-package com.josesa.niorest;
+package com.codependent.niorest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

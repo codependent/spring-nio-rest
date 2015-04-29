@@ -1,4 +1,4 @@
-package com.josesa.niorest;
+package com.codependent.niorest;
 
 import java.util.List;
 
@@ -10,6 +10,8 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.web.client.RestTemplate;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.codependent.niorest.SpringNioRestApplication;
 
 @SpringApplicationConfiguration(classes = SpringNioRestApplication.class)
 @WebIntegrationTest("server.port:9090")
