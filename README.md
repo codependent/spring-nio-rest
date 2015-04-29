@@ -9,7 +9,7 @@ Spring Boot Project showing how efficient nio REST services can be, instead of b
 
 ### Synchronous controller
 
-The response time degrades with time. 99% of the requests end up taking up to 25 seconds after one minute.
+The response time degrades as the test runs. 99% of the requests end up taking up to 25 seconds after one minute, with increasing latency and server errors.
 
     >>loadtest -c 15 -t 60 --rps 700 http://localhost:8080/sync/data    
     ...
@@ -33,7 +33,7 @@ The response time degrades with time. 99% of the requests end up taking up to 25
 
 ### Asynchronous controller
 
-It is able to process up to 700 rps, with no errors and having the response time only limited by the business service's processing time: 
+It is able to process up to the rps setup limit (700), with no errors and having the response time only limited by the business service's processing time: 
 
     >>loadtest -c 15 -t 60 --rps 700 http://localhost:8080/async/data    
     ...
