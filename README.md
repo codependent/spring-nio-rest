@@ -69,3 +69,39 @@ It is able to process up to the rps setup limit (700), with no errors and having
       95%      507 ms
       99%      512 ms
      100%      527 ms (longest request)
+
+Pushing it to its limits it manages to cope with up to an impressive 1700 rps (99996 requests in a minute) without errors:
+
+    >>loadtest -c 15 --rps 1700 -t 60 http://localhost:8080/async/data
+    Requests: 0, requests per second: 0, mean latency: 0 ms
+    Requests: 6673, requests per second: 1329, mean latency: 590 ms
+    Requests: 15197, requests per second: 1706, mean latency: 650 ms
+    Requests: 23692, requests per second: 1702, mean latency: 610 ms
+    Requests: 31950, requests per second: 1653, mean latency: 640 ms
+    Requests: 40727, requests per second: 1757, mean latency: 620 ms
+    Requests: 49139, requests per second: 1684, mean latency: 600 ms
+    Requests: 57655, requests per second: 1701, mean latency: 660 ms
+    Requests: 66197, requests per second: 1710, mean latency: 610 ms
+    Requests: 74748, requests per second: 1707, mean latency: 610 ms
+    Requests: 83111, requests per second: 1677, mean latency: 630 ms
+    Requests: 91410, requests per second: 1658, mean latency: 690 ms
+
+    Target URL:          http://localhost:8080/async/data
+    Max time (s):        60
+    Concurrency level:   15
+    Agent:               none
+    Requests per second: 1700
+
+    Completed requests:  99996
+    Total errors:        0
+    Total time:          60.000301544 s
+    Requests per second: 1667
+    Total time:          60.000301544 s
+
+    Percentage of the requests served within a certain time
+      50%      625 ms
+      90%      728 ms
+      95%      761 ms
+      99%      821 ms
+     100%      1286 ms (longest request)
+    Requests: 99996, requests per second: 1713, mean latency: 750 ms
