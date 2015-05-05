@@ -4,6 +4,8 @@
 
 Spring Boot Project showing how efficient nio REST services can be, instead of blocking REST services.
 
+Swagger documentation available at path -> /v2/api-docs
+
 ## Considerations
 * Load tests have been performed using [loadtest](https://github.com/alexfernandez/loadtest). 
 * The business operation has been set up so that it takes 500msec to process.
