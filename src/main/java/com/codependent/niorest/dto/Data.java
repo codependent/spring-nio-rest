@@ -2,10 +2,14 @@ package com.codependent.niorest.dto;
 
 import java.io.Serializable;
 
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
 public class Data implements Serializable{
 
 	private static final long serialVersionUID = 1049438747605741485L;
+	@ApiModelProperty(required=true)
 	private String key;
+	@ApiModelProperty(required=true)
 	private String value;
 	
 	public Data(){}
