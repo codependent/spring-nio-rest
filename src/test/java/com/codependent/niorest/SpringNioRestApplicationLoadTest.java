@@ -18,7 +18,7 @@ import com.codependent.niorest.dto.LoadTestInfo;
 
 @SpringApplicationConfiguration(classes = SpringNioRestApplication.class)
 @WebIntegrationTest("server.port:9090")
-public class SpringNioRestApplicationLoadTests extends AbstractTestNGSpringContextTests{
+public class SpringNioRestApplicationLoadTest extends AbstractTestNGSpringContextTests{
 
 	private static final String BASE_URL = "http://localhost:9090";
 	

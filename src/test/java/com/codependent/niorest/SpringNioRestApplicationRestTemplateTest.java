@@ -1,4 +1,4 @@
-package com.codependent.niorest;
+ package com.codependent.niorest;
 
 import java.util.List;
 
@@ -15,19 +15,19 @@ import com.codependent.niorest.SpringNioRestApplication;
 
 @SpringApplicationConfiguration(classes = SpringNioRestApplication.class)
 @WebIntegrationTest("server.port:9090")
-public class SpringNioRestApplicationTests extends AbstractTestNGSpringContextTests{
+public class SpringNioRestApplicationRestTemplateTest extends AbstractTestNGSpringContextTests{
 
 private static final String BASE_URL = "http://localhost:9090";
 	
 	RestTemplate rt = new RestTemplate();
 	
 	@Test
-	public void syncLoadTest() {
+	public void syncRestTemplateTest() {
 		doRequest(BASE_URL+"/sync/data");
 	}
 	
 	@Test
-		public void asyncLoadTest() {
+		public void asyncRestTemplateTest() {
 		doRequest(BASE_URL+"/async/data");
 	}
 	
