@@ -9,5 +9,7 @@ import com.codependent.niorest.dto.Data;
 public interface DataService {
 
 	List<Data> loadData();
+	Observable<List<Data>> loadDataHystrix();
 	Observable<List<Data>> loadDataObservable();
+	
 }
