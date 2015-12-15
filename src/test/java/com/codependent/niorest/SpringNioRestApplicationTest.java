@@ -36,7 +36,7 @@ public class SpringNioRestApplicationTest extends AbstractTestNGSpringContextTes
         mockMvc.perform(get("/sync/data").accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
             .andExpect(status().isOk())
             .andExpect(content().contentType("application/json;charset=UTF-8"))
-            .andExpect(jsonPath("$",hasSize(20)));
+            .andExpect(jsonPath("$",hasSize(200)));
     }
 	
 	@Test
@@ -50,6 +50,6 @@ public class SpringNioRestApplicationTest extends AbstractTestNGSpringContextTes
         mockMvc.perform(asyncDispatch(mvcResult))
         	.andExpect(status().isOk())
         	.andExpect(content().contentType("application/json;charset=UTF-8"))
-        	.andExpect(jsonPath("$",hasSize(20)));
+        	.andExpect(jsonPath("$",hasSize(200)));
     }
 }

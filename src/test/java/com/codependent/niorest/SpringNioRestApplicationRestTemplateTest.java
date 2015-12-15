@@ -40,6 +40,6 @@ private static final String BASE_URL = "http://localhost:9090";
 		}else{
 			long t1 = System.currentTimeMillis();
 			System.out.printf("url %s - %s mseg%n",url, (t1-t0));
-			Assert.assertEquals(response.getBody().size(), 20);
+			Assert.assertEquals(response.getBody().size(), 200);
 		}
 	}}
