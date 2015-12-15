@@ -61,4 +61,12 @@ public class AsyncRestController {
 		return dr;
 	}
 	
+	@RequestMapping(value="/observable2/data", method=RequestMethod.GET, produces="application/json")
+	@ApiOperation(value = "Gets data through Observable returning Observable", notes="Gets data asynchronously through Observable returning Observable")
+	@ApiResponses(value={@ApiResponse(code=200, message="OK")})
+	public Observable<List<Data>> getDataObservable2(){
+		Observable<List<Data>> dataObservable = dataService.loadDataObservable();
+		return dataObservable.subscribeOn(scheduler);
+	}
+	
 }

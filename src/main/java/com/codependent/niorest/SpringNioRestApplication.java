@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.cloud.netflix.rx.RxJavaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -17,6 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import com.codependent.niorest.filter.CorsFilter;
 
+@Import(RxJavaAutoConfiguration.class)
 @SpringBootApplication
 @EnableSwagger2
 public class SpringNioRestApplication {
@@ -46,8 +49,8 @@ public class SpringNioRestApplication {
 	@Bean
 	public ThreadPoolTaskExecutor executor(){
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(10);
-		executor.setMaxPoolSize(20);
+		executor.setCorePoolSize(100);
+		executor.setMaxPoolSize(200);
 		return executor;
 	}
 	
