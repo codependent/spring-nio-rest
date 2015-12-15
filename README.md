@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/codependent/spring-nio-rest.svg?branch=master)](https://travis-ci.org/codependent/spring-nio-rest)
 
-Spring Boot Project showing how efficient nio REST services can be, instead of blocking REST services.
+Spring Boot Project showing how efficient nio REST services (Callable & RxJava's Observable) can be, instead of blocking REST services.
 
 Swagger documentation available at path `/v2/api-docs`.
 
@@ -36,7 +36,7 @@ The response time degrades as the test runs. 99% of the requests end up taking u
     Requests: 31193, requests per second: 689, mean latency: 14350 ms
     Errors: 1534, accumulated errors: 7559, 24.2% of total requests
 
-### Asynchronous controller
+### Asynchronous controller with Callable
 
 It is able to process up to the rps setup limit (700), with no errors and having the response time only limited by the business service's processing time: 
 
@@ -110,3 +110,19 @@ Pushing it to its limits it manages to cope with up to an impressive 1700 rps (9
       99%      821 ms
      100%      1286 ms (longest request)
     Requests: 99996, requests per second: 1713, mean latency: 750 ms
+    
+### Asynchronous controller with RxJava's Observable
+
+Surprisingly using Observable not only the request's throughput doesn't improve but also the service starts failing sooner. Furthermore, the
+results are even worse than the synchronous version:
+
+    >>loadtest -c 15 -t 60 --rps 700 http://localhost:8080/observable/data
+    Requests: 0, requests per second: 0, mean latency: 0 ms
+    Requests: 90, requests per second: 18, mean latency: 2250 ms
+    Requests: 187, requests per second: 20, mean latency: 6770 ms
+    Requests: 265, requests per second: 16, mean latency: 11870 ms
+    Requests: 2872, requests per second: 521, mean latency: 1560 ms
+    Errors: 2518, accumulated errors: 2518, 87.7% of total requests
+    Requests: 6373, requests per second: 700, mean latency: 1590 ms
+    Errors: 3401, accumulated errors: 5919, 92.9% of total requests    
+
