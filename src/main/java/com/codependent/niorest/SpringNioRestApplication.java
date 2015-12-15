@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
@@ -40,6 +41,14 @@ public class SpringNioRestApplication {
 		registrationBean.setUrlPatterns(urlPatterns);
 		registrationBean.setOrder(1);
 		return registrationBean;
+	}
+	
+	@Bean
+	public ThreadPoolTaskExecutor executor(){
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setCorePoolSize(10);
+		executor.setMaxPoolSize(20);
+		return executor;
 	}
 	
 	private ApiInfo apiInfo() {
