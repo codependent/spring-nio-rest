@@ -51,13 +51,6 @@ public class AsyncRestController {
 		return ( () -> {return dataService.loadData();} );
 	}
 	
-	@RequestMapping(value="/hystrix/data", method=RequestMethod.GET, produces="application/json")
-	@ApiOperation(value = "Gets data hystrix", notes="Gets data asynchronously with hystrix")
-	@ApiResponses(value={@ApiResponse(code=200, message="OK")})
-	public Observable<List<Data>> getDataHystrix(){
-		return dataService.loadDataHystrix();
-	}
-	
 	@RequestMapping(value="/observable/data", method=RequestMethod.GET, produces="application/json")
 	@ApiOperation(value = "Gets data through Observable", notes="Gets data asynchronously through Observable")
 	@ApiResponses(value={@ApiResponse(code=200, message="OK")})
@@ -74,6 +67,13 @@ public class AsyncRestController {
 	public Observable<List<Data>> getDataObservable2(){
 		Observable<List<Data>> dataObservable = dataService.loadDataObservable();
 		return dataObservable.subscribeOn(scheduler);
+	}
+	
+	@RequestMapping(value="/hystrix/data", method=RequestMethod.GET, produces="application/json")
+	@ApiOperation(value = "Gets data hystrix", notes="Gets data asynchronously with hystrix")
+	@ApiResponses(value={@ApiResponse(code=200, message="OK")})
+	public Observable<List<Data>> getDataHystrix(){
+		return dataService.loadDataHystrix();
 	}
 	
 }

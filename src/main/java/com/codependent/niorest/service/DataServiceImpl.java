@@ -3,7 +3,6 @@ package com.codependent.niorest.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.cloud.netflix.rx.ObservableReturnValueHandler;
 import org.springframework.stereotype.Service;
 
 import rx.Observable;
@@ -22,11 +21,12 @@ public class DataServiceImpl implements DataService{
 
 	@Override
 	public Observable<List<Data>> loadDataObservable() {
-		return Observable.create( s -> {
+		return Observable.just(generateData());
+		/*return Observable.create( s -> {
 			List<Data> dataList = generateData();
 			s.onNext(dataList);
 			s.onCompleted();
-		});
+		});*/
 	}
 	
 	@HystrixCommand
@@ -43,9 +43,15 @@ public class DataServiceImpl implements DataService{
 	
 	private List<Data> generateData(){
 		List<Data> dataList = new ArrayList<Data>();
-		for (int i = 0; i < 200; i++) {
+		for (int i = 0; i < 20; i++) {
 			Data data = new Data("key"+i, "value"+i);
 			dataList.add(data);
+		}
+		//Processing time simulation
+		try {
+			Thread.sleep(400);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 		return dataList;
 	}

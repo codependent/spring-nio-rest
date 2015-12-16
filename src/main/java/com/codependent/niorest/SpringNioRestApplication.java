@@ -51,8 +51,7 @@ public class SpringNioRestApplication {
 	@Bean
 	public ThreadPoolTaskExecutor executor(){
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(100);
-		executor.setMaxPoolSize(200);
+		executor.setCorePoolSize(5000);
 		return executor;
 	}
 	
