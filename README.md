@@ -113,16 +113,20 @@ Pushing it to its limits it manages to cope with up to an impressive 1700 rps (9
     
 ### Asynchronous controller with RxJava's Observable
 
-Surprisingly using Observable not only the request's throughput doesn't improve but also the service starts failing sooner. Furthermore, the
-results are even worse than the synchronous version:
+It's performance is slightly better than the Callable version
 
-    >>loadtest -c 15 -t 60 --rps 700 http://localhost:8080/observable/data
+    >>loadtest -c 15 -t 60 --rps 1700 http://localhost:8080/observable/data
     Requests: 0, requests per second: 0, mean latency: 0 ms
-    Requests: 90, requests per second: 18, mean latency: 2250 ms
-    Requests: 187, requests per second: 20, mean latency: 6770 ms
-    Requests: 265, requests per second: 16, mean latency: 11870 ms
-    Requests: 2872, requests per second: 521, mean latency: 1560 ms
-    Errors: 2518, accumulated errors: 2518, 87.7% of total requests
-    Requests: 6373, requests per second: 700, mean latency: 1590 ms
-    Errors: 3401, accumulated errors: 5919, 92.9% of total requests    
+    Requests: 6707, requests per second: 1341, mean latency: 560 ms
+    Requests: 15070, requests per second: 1675, mean latency: 560 ms
+    Requests: 23658, requests per second: 1716, mean latency: 630 ms
+    Requests: 31620, requests per second: 1594, mean latency: 570 ms
+    Requests: 40698, requests per second: 1816, mean latency: 730 ms
+    Requests: 49173, requests per second: 1695, mean latency: 560 ms
+    ...
+    Completed requests:  100088
+    Total errors:        0
+    Total time:          60.000421678 s
+    Requests per second: 1668
+    Total time:          60.000421678 s
 
