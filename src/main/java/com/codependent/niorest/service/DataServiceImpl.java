@@ -2,6 +2,7 @@ package com.codependent.niorest.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Service;
 
@@ -16,17 +17,17 @@ public class DataServiceImpl implements DataService{
 
 	@Override
 	public List<Data> loadData() {
+		try {
+			Thread.sleep(400);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return generateData();
 	}
 
 	@Override
 	public Observable<List<Data>> loadDataObservable() {
-		return Observable.just(generateData());
-		/*return Observable.create( s -> {
-			List<Data> dataList = generateData();
-			s.onNext(dataList);
-			s.onCompleted();
-		});*/
+		return Observable.just(generateData()).delay(400, TimeUnit.MILLISECONDS);
 	}
 	
 	@HystrixCommand
@@ -46,12 +47,6 @@ public class DataServiceImpl implements DataService{
 		for (int i = 0; i < 20; i++) {
 			Data data = new Data("key"+i, "value"+i);
 			dataList.add(data);
-		}
-		//Processing time simulation
-		try {
-			Thread.sleep(400);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
 		}
 		return dataList;
 	}
