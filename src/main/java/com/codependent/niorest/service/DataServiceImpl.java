@@ -10,7 +10,6 @@ import rx.Observable;
 
 import com.codependent.niorest.dto.Data;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.command.ObservableResult;
 
 @Service
 public class DataServiceImpl implements DataService{
@@ -33,13 +32,7 @@ public class DataServiceImpl implements DataService{
 	@HystrixCommand
 	@Override
 	public Observable<List<Data>> loadDataHystrix() {
-		return new ObservableResult<List<Data>>() {
-			@Override
-			public List<Data> invoke() {
-				List<Data> dataList = generateData();
-				return dataList;
-			}
-		};
+		return Observable.just(generateData());
 	}
 	
 	private List<Data> generateData(){
