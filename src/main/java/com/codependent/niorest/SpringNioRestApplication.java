@@ -5,20 +5,22 @@ import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.rx.RxJavaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import com.codependent.niorest.filter.CorsFilter;
+import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
+
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import com.codependent.niorest.filter.CorsFilter;
 
 @EnableCircuitBreaker
 @Import(RxJavaAutoConfiguration.class)
@@ -51,8 +53,16 @@ public class SpringNioRestApplication {
 	@Bean
 	public ThreadPoolTaskExecutor executor(){
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setThreadGroupName("MyThreadGroup");
+		executor.setThreadNamePrefix("MyThreadNamePrefix");
 		executor.setCorePoolSize(5000);
 		return executor;
+	}
+	
+	@Bean
+	public ServletRegistrationBean hystrixMetricsStreamServlet(){
+		ServletRegistrationBean srb = new ServletRegistrationBean(new HystrixMetricsStreamServlet(), "/hystrix.stream");
+		return srb;
 	}
 	
 	private ApiInfo apiInfo() {
