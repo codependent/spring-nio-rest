@@ -18,11 +18,6 @@ public class DataServiceImpl implements DataService{
 
 	@Override
 	public List<Data> loadData() {
-		try {
-			Thread.sleep(400);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		return generateData(false);
 	}
 
@@ -59,6 +54,11 @@ public class DataServiceImpl implements DataService{
 			throw new RuntimeException("Counldn't generate data");
 		}
 		List<Data> dataList = new ArrayList<Data>();
+		try {
+			Thread.sleep(400);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		for (int i = 0; i < 20; i++) {
 			Data data = new Data("key"+i, "value"+i);
 			dataList.add(data);
