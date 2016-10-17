@@ -2,8 +2,8 @@ package com.codependent.niorest;
 
 import java.util.List;
 
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -12,12 +12,10 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import com.codependent.niorest.SpringNioRestApplication;
 import com.codependent.niorest.dto.LoadTestInfo;
 
 
-@SpringApplicationConfiguration(classes = SpringNioRestApplication.class)
-@WebIntegrationTest("server.port:9090")
+@SpringBootTest(classes = SpringNioRestApplication.class, webEnvironment=WebEnvironment.DEFINED_PORT, properties="server.port=9090")
 public class SpringNioRestApplicationLoadTest extends AbstractTestNGSpringContextTests{
 
 	private static final String BASE_URL = "http://localhost:9090";
@@ -37,8 +35,8 @@ public class SpringNioRestApplicationLoadTest extends AbstractTestNGSpringContex
 	}
 	
 	@Test(invocationCount=200, threadPoolSize=10)
-		public void asyncLoadTest() {
-		doRequest(BASE_URL+"/async/data", asyncTest);
+		public void asyncCallableLoadTest() {
+		doRequest(BASE_URL+"/callable/data", asyncTest);
 	}
 	
 	@SuppressWarnings("rawtypes")

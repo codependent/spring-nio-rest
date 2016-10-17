@@ -77,7 +77,7 @@ public class AsyncRestController {
 		return dr;
 	}
 	
-	@RequestMapping(value="/observable/data", method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value="/observable-deferred/data", method=RequestMethod.GET, produces="application/json")
 	@ApiOperation(value = "Gets data through Observable", notes="Gets data asynchronously through Observable")
 	@ApiResponses(value={@ApiResponse(code=200, message="OK")})
 	public DeferredResult<List<Data>> getDataObservable(){
@@ -90,7 +90,7 @@ public class AsyncRestController {
 		return dr;
 	}
 	
-	@RequestMapping(value="/observable2/data", method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value="/observable/data", method=RequestMethod.GET, produces="application/json")
 	@ApiOperation(value = "Gets data through Observable returning Observable", notes="Gets data asynchronously through Observable returning Observable")
 	@ApiResponses(value={@ApiResponse(code=200, message="OK")})
 	public Single<List<Data>> getDataObservable2(){
@@ -108,7 +108,7 @@ public class AsyncRestController {
 		return observable.toSingle().subscribeOn(scheduler);
 	}
 	
-	@RequestMapping(value="/hystrix2/data", method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value="/hystrix-callable/data", method=RequestMethod.GET, produces="application/json")
 	@ApiOperation(value = "Gets data hystrix", notes="Gets data asynchronously with hystrix")
 	@ApiResponses(value={@ApiResponse(code=200, message="OK")})
 	public Callable<List<Data>> getDataHystrixAsync() throws InterruptedException, ExecutionException{

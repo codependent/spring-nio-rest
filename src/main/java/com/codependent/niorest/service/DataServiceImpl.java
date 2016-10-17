@@ -30,7 +30,7 @@ public class DataServiceImpl implements DataService{
 	@Override
 	public Observable<List<Data>> loadDataHystrix() {
 		double random = Math.random();
-		return Observable.fromCallable(() -> generateData( random < 0.5 ? false : true ));
+		return Observable.fromCallable(() -> generateData( random < 0.9 ? false : true ));
 	}
 	
 	@HystrixCommand(observableExecutionMode=ObservableExecutionMode.LAZY, fallbackMethod="loadDataHystrixFallback")
@@ -40,11 +40,12 @@ public class DataServiceImpl implements DataService{
 		return new AsyncResult<List<Data>>() {
             @Override
             public List<Data> invoke() {
-                return generateData( random < 0.5 ? false : true );
+                return generateData( random < 0.9 ? false : true );
             }
         };
 	}
 	
+	@SuppressWarnings("unused")
 	private List<Data> loadDataHystrixFallback(){
 		return new ArrayList<>();
 	}

@@ -1,10 +1,15 @@
 package com.codependent.niorest;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.asyncDispatch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.web.servlet.MockMvc;
@@ -14,11 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-@SpringApplicationConfiguration(classes = SpringNioRestApplication.class)
-@WebIntegrationTest("server.port:9090")
+@SpringBootTest(classes = SpringNioRestApplication.class)
 public class SpringNioRestApplicationTest extends AbstractTestNGSpringContextTests {
 
 	@Autowired
@@ -40,16 +41,45 @@ public class SpringNioRestApplicationTest extends AbstractTestNGSpringContextTes
     }
 	
 	@Test
-    public void getAsyncData() throws Exception{
-        MvcResult mvcResult = mockMvc.perform(get("/async/data").accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
-            .andExpect(request().asyncStarted())
-            .andReturn();
-        
-        mvcResult.getAsyncResult();
-        
-        mockMvc.perform(asyncDispatch(mvcResult))
-        	.andExpect(status().isOk())
-        	.andExpect(content().contentType("application/json;charset=UTF-8"))
-        	.andExpect(jsonPath("$",hasSize(20)));
-    }
+    public void getAsyncCallableData() throws Exception{
+        performAsync("/callable/data");
+	}
+	
+	@Test
+    public void getAsyncDeferredData() throws Exception{
+        performAsync("/deferred/data");
+	}
+	
+	@Test
+    public void getAsyncObservableData() throws Exception{
+        performAsync("/observable/data");
+	}
+	
+	@Test
+    public void getAsyncObservableDeferredData() throws Exception{
+        performAsync("/observable-deferred/data");
+	}
+	
+	@Test
+    public void getAsyncHystrixData() throws Exception{
+        performAsync("/hystrix/data");
+	}
+	
+	@Test
+    public void getAsyncHystrixCallableData() throws Exception{
+        performAsync("/hystrix-callable/data");
+	}
+	
+	private void performAsync(String url) throws Exception{
+		MvcResult mvcResult = mockMvc.perform(get(url).accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+	            .andExpect(request().asyncStarted())
+	            .andReturn();
+	        
+	        mvcResult.getAsyncResult();
+	        
+	        mockMvc.perform(asyncDispatch(mvcResult))
+	        	.andExpect(status().isOk())
+	        	.andExpect(content().contentType("application/json;charset=UTF-8"))
+	        	.andExpect(jsonPath("$",hasSize(20)));
+	}
 }
