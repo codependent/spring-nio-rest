@@ -40,7 +40,7 @@ The response time degrades as the test runs. 99% of the requests end up taking u
 
 It is able to process up to the rps setup limit (700), with no errors and having the response time only limited by the business service's processing time: 
 
-    >>loadtest -c 15 -t 60 --rps 700 http://localhost:8080/async/data    
+    >>loadtest -c 15 -t 60 --rps 700 http://localhost:8080/callable/data    
     ...
     Requests: 0, requests per second: 0, mean latency: 0 ms
     Requests: 2839, requests per second: 568, mean latency: 500 ms
