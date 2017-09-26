@@ -1,3 +1,4 @@
+@Library('jenkins-pipeline-shared-library-example')
 pipeline {
   agent any
   tools { 
