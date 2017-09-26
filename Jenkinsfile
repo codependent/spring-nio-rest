@@ -12,7 +12,7 @@ pipeline {
            echo "PATH = ${PATH}"
            echo "M2_HOME = ${M2_HOME}"
            ''' 
-        sh 'mvn -Dmaven.test.failure.ignore=true install'
+        sh 'mvn -Dmaven.test.failure.ignore=true clean install -U'
       }
     }
     stage ('Finish') {
