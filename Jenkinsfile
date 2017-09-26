@@ -12,7 +12,8 @@ pipeline {
     stage ('Build Application') {
       steps {
         echo 'Building application'
-        hello('Codependent')
+        def utils = new Utils()
+        utils.hello('Codependent')
         sh '''
            echo "PATH = ${PATH}"
            echo "M2_HOME = ${M2_HOME}"
