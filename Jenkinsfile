@@ -1,4 +1,6 @@
-@Library('jenkins-pipeline-shared-library-example')
+#!groovy
+@Library('bitwiseman-shared@blog/declarative/notifications')
+
 pipeline {
   agent any
   tools { 
