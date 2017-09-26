@@ -8,11 +8,13 @@ pipeline {
     maven 'M3' 
     jdk 'JDK8' 
   }
+  environment {
+    utils = new Utils()
+  }
   stages {
     stage ('Build Application') {
       steps {
         echo 'Building application'
-        def utils = new Utils()
         utils.hello('Codependent')
         sh '''
            echo "PATH = ${PATH}"
