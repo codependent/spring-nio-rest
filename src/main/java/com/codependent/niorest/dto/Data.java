@@ -2,7 +2,7 @@ package com.codependent.niorest.dto;
 
 import java.io.Serializable;
 
-import com.wordnik.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModelProperty;
 
 public class Data implements Serializable{
 
