@@ -6,4 +6,5 @@ pipeline {
     stage 'Finish' {
     
     }
+  }
 }
