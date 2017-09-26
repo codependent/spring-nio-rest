@@ -1,9 +1,9 @@
 pipeline {
   stages {
-    stage 'Start' {
+    stage ('Build Application') {
     
     }
-    stage 'Finish' {
+    stage ('Finish') {
     
     }
   }
