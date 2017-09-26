@@ -1,5 +1,6 @@
 #!groovy
-@Library('jenkins-pipeline-shared-library-example') _
+@Library('jenkins-pipeline-shared-library-example')
+import com.codependent.jenkins.pipelines.Utils
 
 pipeline {
   agent any
@@ -11,6 +12,7 @@ pipeline {
     stage ('Build Application') {
       steps {
         echo 'Building application'
+        hello('Codependent')
         sh '''
            echo "PATH = ${PATH}"
            echo "M2_HOME = ${M2_HOME}"
