@@ -1,5 +1,5 @@
 #!groovy
-@Library('bitwiseman-shared@blog/declarative/notifications')
+@Library('bitwiseman-shared@blog/declarative/notifications') _
 
 pipeline {
   agent any
