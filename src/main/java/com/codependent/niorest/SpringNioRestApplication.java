@@ -39,11 +39,11 @@ public class SpringNioRestApplication {
 	}
 	
 	@Bean
-	public FilterRegistrationBean registerCorsFilter(){
+	public FilterRegistrationBean<CorsFilter> registerCorsFilter(){
 		CorsFilter cf = new CorsFilter();
 		List<String> urlPatterns = new ArrayList<String>();
 	    urlPatterns.add("/*");
-	    FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+	    FilterRegistrationBean<CorsFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(cf);
 		registrationBean.setUrlPatterns(urlPatterns);
 		registrationBean.setOrder(1);
@@ -60,8 +60,8 @@ public class SpringNioRestApplication {
 	}
 	
 	@Bean
-	public ServletRegistrationBean hystrixMetricsStreamServlet(){
-		ServletRegistrationBean srb = new ServletRegistrationBean(new HystrixMetricsStreamServlet(), "/hystrix.stream");
+	public ServletRegistrationBean<HystrixMetricsStreamServlet> hystrixMetricsStreamServlet(){
+		ServletRegistrationBean<HystrixMetricsStreamServlet> srb = new ServletRegistrationBean<>(new HystrixMetricsStreamServlet(), "/hystrix.stream");
 		return srb;
 	}
 	
