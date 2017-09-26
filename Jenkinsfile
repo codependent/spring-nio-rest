@@ -1,5 +1,5 @@
 #!groovy
-@Library('bitwiseman-shared@blog/declarative/notifications') _
+@Library('jenkins-pipeline-shared-library-example') _
 
 pipeline {
   agent any
