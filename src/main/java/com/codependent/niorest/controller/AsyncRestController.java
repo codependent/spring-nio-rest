@@ -9,8 +9,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.context.request.async.WebAsyncManager;
@@ -52,7 +51,7 @@ public class AsyncRestController {
 	 * Callable usa el task executor de {@link WebAsyncManager}
 	 * @return
 	 */
-	@RequestMapping(value="/callable/data", method=RequestMethod.GET, produces="application/json")
+	@GetMapping(value="/callable/data", produces="application/json")
 	@ApiOperation(value = "Gets data", notes="Gets data asynchronously")
 	@ApiResponses(value={@ApiResponse(code=200, message="OK")})
 	public Callable<List<Data>> getDataCallable(){
@@ -64,7 +63,7 @@ public class AsyncRestController {
 	 * es asíncrona 
 	 * @return
 	 */
-	@RequestMapping(value="/deferred/data", method=RequestMethod.GET, produces="application/json")
+	@GetMapping(value="/deferred/data", produces="application/json")
 	@ApiOperation(value = "Gets data", notes="Gets data asynchronously")
 	@ApiResponses(value={@ApiResponse(code=200, message="OK")})
 	public DeferredResult<List<Data>> getDataDeferredResult(){
@@ -77,7 +76,7 @@ public class AsyncRestController {
 		return dr;
 	}
 	
-	@RequestMapping(value="/observable-deferred/data", method=RequestMethod.GET, produces="application/json")
+	@GetMapping(value="/observable-deferred/data", produces="application/json")
 	@ApiOperation(value = "Gets data through Observable", notes="Gets data asynchronously through Observable")
 	@ApiResponses(value={@ApiResponse(code=200, message="OK")})
 	public DeferredResult<List<Data>> getDataObservable(){
@@ -90,7 +89,7 @@ public class AsyncRestController {
 		return dr;
 	}
 	
-	@RequestMapping(value="/observable/data", method=RequestMethod.GET, produces="application/json")
+	@GetMapping(value="/observable/data", produces="application/json")
 	@ApiOperation(value = "Gets data through Observable returning Observable", notes="Gets data asynchronously through Observable returning Observable")
 	@ApiResponses(value={@ApiResponse(code=200, message="OK")})
 	public Single<List<Data>> getDataObservable2(){
@@ -99,7 +98,7 @@ public class AsyncRestController {
 		return dataObservable.toSingle().subscribeOn(scheduler);
 	}
 	
-	@RequestMapping(value="/hystrix/data", method=RequestMethod.GET, produces="application/json")
+	@GetMapping(value="/hystrix/data", produces="application/json")
 	@ApiOperation(value = "Gets data hystrix", notes="Gets data asynchronously with hystrix")
 	@ApiResponses(value={@ApiResponse(code=200, message="OK")})
 	public Single<List<Data>> getDataHystrix(){
@@ -108,7 +107,7 @@ public class AsyncRestController {
 		return observable.toSingle().subscribeOn(scheduler);
 	}
 	
-	@RequestMapping(value="/hystrix-callable/data", method=RequestMethod.GET, produces="application/json")
+	@GetMapping(value="/hystrix-callable/data", produces="application/json")
 	@ApiOperation(value = "Gets data hystrix", notes="Gets data asynchronously with hystrix")
 	@ApiResponses(value={@ApiResponse(code=200, message="OK")})
 	public Callable<List<Data>> getDataHystrixAsync() throws InterruptedException, ExecutionException{

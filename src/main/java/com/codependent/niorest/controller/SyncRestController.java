@@ -3,8 +3,7 @@ package com.codependent.niorest.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codependent.niorest.dto.Data;
@@ -29,7 +28,7 @@ public class SyncRestController {
 	/**
 	 * Returns {@link List<Data>}
 	 */
-	@RequestMapping(value="/sync/data", method=RequestMethod.GET, produces="application/json")
+	@GetMapping(value="/sync/data", produces="application/json")
 	@ApiOperation(value = "Gets data", notes="Gets data synchronously")
 	@ApiResponses(value={@ApiResponse(code=200, message="OK")})
 	public List<Data> getData(){
